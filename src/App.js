@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './Home';
+import MovieDetails from './MovieDetails';
 
-function App() {
+const App = () => {
+  // Sample movie data
+  const movies = [
+    {
+      id: 1,
+      title: 'Movie Title 1',
+      description: 'Description for Movie 1',
+      trailerLink: 'embed-link-1',
+    },
+    {
+      id: 2,
+      title: 'Movie Title 2',
+      description: 'Description for Movie 2',
+      trailerLink: 'embed-link-2',
+    },
+    // Add more movies as needed
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact render={() => <Home movies={movies} />} />
+        <Route path="/movie/:id" render={(props) => <MovieDetails {...props} movies={movies} />} />
+      </Switch>
+    </Router>
   );
-}
+};
 
 export default App;
+
